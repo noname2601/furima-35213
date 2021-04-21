@@ -40,8 +40,7 @@ Things you may want to cover:
 
 ### Association
  
-- has_many :items
-- belongs_to :purchase 
+- has_many :items 
 - has_many :managements
 
 ## purchases テーブル
@@ -81,7 +80,7 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user 
-- belongs_to :management
+- has_one :management
 
 ## managements テーブル
 
