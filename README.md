@@ -40,7 +40,9 @@ Things you may want to cover:
 
 ### Association
  
-- has_many :item 
+- has_many :items
+- belongs_to :purchase 
+- has_many :managements
 
 ## purchases テーブル
 
@@ -52,7 +54,7 @@ Things you may want to cover:
 | adress           | string  | null: false                  |
 | building_name    | string  |                              |
 | phone_number     | string  | null: false                  |
-| _id              | integer | null: false,foreign_key:true |
+| management_id    | integer | null: false,foreign_key:true |
 
 
 ### Association
@@ -79,6 +81,7 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user 
+- belongs_to :management
 
 ## managements テーブル
 
@@ -89,8 +92,9 @@ Things you may want to cover:
 
 ### Association
 
+- belongs_to :user
 - belongs_to :item 
-- belongs_to :purchase
+- has_one :purchase
 
 
 
