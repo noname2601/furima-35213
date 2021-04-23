@@ -8,9 +8,9 @@ class User < ApplicationRecord
 
   validates :family_name, :first_name, format: {with: /\A[ぁ-んァ-ヶ一-龥]+\z/}
 
-  validates :family_name_kana, :first_name_kana, format: {with: /\p{katakana}/}
+  validates :family_name_kana, :first_name_kana, format: {with: /\A\p{katakana}+\z/}
 
-  VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
 validates :password, format: { with: VALID_PASSWORD_REGEX }
 
    
