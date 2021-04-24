@@ -20,9 +20,9 @@ require 'rails_helper'
      end
 
      it "emailに@を含むこと" do
-      @user.email = ""
+      @user.email = "test.co.jp"
       @user.valid?
-      expect(@user.errors.full_messages).to include("Email can't be blank")
+      expect(@user.errors.full_messages).to include("Email is invalid")
     end
 
 
@@ -45,7 +45,7 @@ require 'rails_helper'
   end
 
   it "passwordが全角では登録できないこと" do
-    @user.password = "ａａａａａａ"
+    @user.password = "ａａａａ１１"
     @user.valid?
     expect(@user.errors.full_messages).to include("Password is invalid")
   end
@@ -59,6 +59,16 @@ require 'rails_helper'
   @user.first_name = "aa"
   @user.valid?
   expect(@user.errors.full_messages).to include("First name is invalid")
+end
+it 'family_nameが必須であること' do
+  @user.family_name = ""
+  @user.valid?
+  expect(@user.errors.full_messages).to include("Family name can't be blank")
+end
+it 'first_nameが必須であること' do
+  @user.first_name = ""
+  @user.valid?
+  expect(@user.errors.full_messages).to include("First name can't be blank")
 end
 it 'family_name_kanaが必須であること' do
   @user.family_name_kana = ""
