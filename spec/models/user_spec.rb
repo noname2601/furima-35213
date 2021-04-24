@@ -4,6 +4,10 @@ require 'rails_helper'
     @user = FactoryBot.build(:user)
   end
    describe "ユーザー新規登録" do
+    it "全ての項目の入力が存在すれば登録できること" do
+      @user.valid?
+      expect(@user)
+    end
      it "nicknameが必須であること" do
        @user.nickname = ""
        @user.valid?
@@ -14,6 +18,14 @@ require 'rails_helper'
        @user.valid?
        expect(@user.errors.full_messages).to include("Email can't be blank")
      end
+
+     it "emailに@を含むこと" do
+      @user.email = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email can't be blank")
+    end
+
+
      it 'passwordが必須であること' do
       @user.password = ""
       @user.valid?
@@ -25,15 +37,28 @@ require 'rails_helper'
     @user.valid?
     expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
   end
-   it 'family_nameが必須であること' do
-    @user.family_name = ""
+
+  it "passwordは英語のみでは登録できない" do
+    @user.password = "aaaaaaa"
     @user.valid?
-    expect(@user.errors.full_messages).to include("Family name can't be blank")
+    expect(@user.errors.full_messages).to include("Password is invalid")
+  end
+
+  it "passwordが全角では登録できないこと" do
+    @user.password = "ａａａａａａ"
+    @user.valid?
+    expect(@user.errors.full_messages).to include("Password is invalid")
+  end
+
+   it 'family_nameが漢字・平仮名・カタカナ以外では登録できないこと' do
+    @user.family_name = "aa"
+    @user.valid?
+    expect(@user.errors.full_messages).to include("Family name is invalid")
  end
- it 'first_nameが必須であること' do
-  @user.first_name = ""
+ it 'first_nameが漢字・平仮名・カタカナ以外では登録できないこと' do
+  @user.first_name = "aa"
   @user.valid?
-  expect(@user.errors.full_messages).to include("First name can't be blank")
+  expect(@user.errors.full_messages).to include("First name is invalid")
 end
 it 'family_name_kanaが必須であること' do
   @user.family_name_kana = ""
@@ -50,14 +75,14 @@ it 'birth_dayが必須であること' do
   @user.valid?
   expect(@user.errors.full_messages).to include("Birth day can't be blank")
 end
-  it 'family_name_kanaがカタカナで返ること' do
-   @user.family_name_kana = ""
+  it 'family_name_kanaがカタカナであること' do
+   @user.family_name_kana = "ああ"
    @user.valid?
    expect(@user.errors.full_messages).to include("Family name kana is invalid")
   end
 
-  it 'first_name_kanaがカタカナで返ること' do
-    @user.first_name_kana = ""
+  it 'first_name_kanaがカタカナであること' do
+    @user.first_name_kana = "あい"
     @user.valid?
     expect(@user.errors.full_messages).to include("First name kana is invalid")
    end
