@@ -6,6 +6,8 @@ class Item < ApplicationRecord
   belongs_to :shipping_free
   belongs_to :area
   belongs_to :ship_day
+
+  belongs_to :user
   
 
   with_options presence: true do
@@ -26,7 +28,6 @@ class Item < ApplicationRecord
     validates :shipping_free_id
     validates :area_id
     validates :ship_day_id
-    validates :selling_price
   end
   
 
