@@ -4,9 +4,9 @@ FactoryBot.define do
     area_id               {2}
     city                  {"松山市"}
     adress                {"1-1"}
-    phone_number          {"09012345678"} 
-    user_id                {1}
-    item_id                {1}
+    phone_number          {"09012345678"}
+    building_name         {"ビル"}
+              
     token                  {"sk_test_a999aaa6bbb111111cc22d2c"}
   end
 end
