@@ -1,7 +1,7 @@
 class ManagementsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_management_item, only: [:index, :create ]
-  before_action :pay_managements_purchases, only: [:create]
+  
 
   def index
     @managements_purchases = ManagementPurchase.new
@@ -12,6 +12,7 @@ class ManagementsController < ApplicationController
   def create
     @managements_purchases = ManagementPurchase.new(management_purchase_params)
     if @managements_purchases.valid?
+      pay_managements_purchases
       @managements_purchases.save
       redirect_to root_path
     else
