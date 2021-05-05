@@ -11,6 +11,8 @@ class ManagementPurchase
     validates :city
     validates :adress
     validates :token
+    validates :user_id
+    validates :item_id
 
 end
 
