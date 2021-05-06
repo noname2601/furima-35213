@@ -37,6 +37,11 @@ RSpec.describe ManagementPurchase, type: :model do
         @managements_purchases.valid?
         expect(@managements_purchases.errors.full_messages).to include("Area can't be blank")
       end
+      it "都道府県が1の場合登録できないこと" do
+        @managements_purchases.area_id = 1
+        @managements_purchases.valid?
+        expect(@managements_purchases.errors.full_messages).to include("Area must be other than 1")
+      end
       it "市区町村が必須であること" do
         @managements_purchases.city = ""
         @managements_purchases.valid?
