@@ -57,8 +57,13 @@ RSpec.describe ManagementPurchase, type: :model do
         @managements_purchases.valid?
         expect(@managements_purchases.errors.full_messages).to include("Phone number can't be blank")
       end
-      it "電話番号は11桁以内の数値のみ保存可能なこと" do
+      it "電話番号は12桁以上は登録ができないこと" do
         @managements_purchases.phone_number = "090123456789"
+        @managements_purchases.valid?
+        expect(@managements_purchases.errors.full_messages).to include("Phone number is invalid")
+      end
+      it "電話番号は英数混合では登録できないこと" do
+        @managements_purchases.phone_number = "a090123b567"
         @managements_purchases.valid?
         expect(@managements_purchases.errors.full_messages).to include("Phone number is invalid")
       end
