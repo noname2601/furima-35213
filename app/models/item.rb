@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :ship_day
 
   belongs_to :user
+  has_one :management
   
 
   with_options presence: true do

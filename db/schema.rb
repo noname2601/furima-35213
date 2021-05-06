@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_231257) do
+ActiveRecord::Schema.define(version: 2021_05_03_005153) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -47,6 +47,28 @@ ActiveRecord::Schema.define(version: 2021_04_25_231257) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "managements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_managements_on_item_id"
+    t.index ["user_id"], name: "index_managements_on_user_id"
+  end
+
+  create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "post_code", null: false
+    t.integer "area_id", null: false
+    t.string "city", null: false
+    t.string "adress", null: false
+    t.string "building_name"
+    t.string "phone_number", null: false
+    t.bigint "management_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["management_id"], name: "index_purchases_on_management_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", default: "", null: false
@@ -66,4 +88,7 @@ ActiveRecord::Schema.define(version: 2021_04_25_231257) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "managements", "items"
+  add_foreign_key "managements", "users"
+  add_foreign_key "purchases", "managements"
 end
