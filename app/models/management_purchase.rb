@@ -3,7 +3,7 @@ class ManagementPurchase
   attr_accessor :post_code, :area_id, :city, :adress, :building_name, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
-    validates :post_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+    validates :post_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "ハイフンを入力してください"}
     VALID_PHONE_NUMBER_REGEX = /\A0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1})[-)]?\d{4}\z|\A0[5789]0[-]?\d{4}[-]?\d{4}\z/
   validates :phone_number, format: { with: VALID_PHONE_NUMBER_REGEX }, numericality: {only_integer: true, }
 

@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   
 
   with_options presence: true do
-    validates :selling_price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
+    validates :selling_price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "は無効です"}
     validates :name
     validates :introduction
     validates :category_id
